@@ -1,0 +1,24 @@
+<div class="media-list" class="container">
+  <h3 *ngIf="productList">Lista de Productos</h3>
+  <h3 *ngIf="!productList">Carrito de compras</h3>
+
+
+  <div *ngIf="productList">
+    <app-producto-item *ngFor="let item of products" [product]="item" [productList]="productList"
+                       (emisor)="productHandler($event, item)">
+    </app-producto-item>
+
+      <div class="btn btn-primary" style="cursor: pointer; margin-top: 25px; margin-bottom: 15px;" (click)="addToCart()">Añadir al carrito</div>
+      <h5 class="col-sm-6 mt-2">Cantidad de items: {{ count }}</h5>
+
+  </div>
+
+  <div *ngIf="!productList">
+    <app-producto-item *ngFor="let item of carrito" [product]="item" [productList]="productList"
+                       (emisor)="productHandler($event, item)">
+    </app-producto-item>
+
+
+      <h5 class="col-sm-6 mt-2">Cantidad de items: {{ carrito.length }}</h5>
+  </div>
+</div>
